@@ -137,9 +137,17 @@
   .info .v{font-size:17px}
   .info .v a{text-decoration:none;color:var(--ox);font-weight:600}
   .info small{display:block;font-size:14px;color:var(--mid);margin-top:4px;font-family:ui-sans-serif,system-ui,sans-serif}
-  .maph{min-height:300px;height:100%;border:1.5px dashed var(--line);border-radius:4px;background:var(--cream2);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:24px}
-  .maph span{font:500 13px ui-sans-serif,system-ui,sans-serif;color:#8e8271}
+  .mapwrap{display:flex;flex-direction:column;gap:12px}
+  .mapbox{position:relative;border:1px solid var(--line);border-radius:5px;overflow:hidden;
+    background:var(--cream2);min-height:340px}
+  .mapbox iframe{display:block;width:100%;height:340px;border:0}
+  .mapfall{position:absolute;inset:0;z-index:-1;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:9px;text-align:center;padding:24px}
+  .mapfall span{font:500 13px ui-sans-serif,system-ui,sans-serif;color:#8e8271}
+  .dirbtn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--ink);
+    color:var(--cream);text-decoration:none;padding:13px 20px;border-radius:3px;
+    font:600 14px ui-sans-serif,system-ui,sans-serif}
+  .dirbtn:hover{background:var(--ox)}
 
   .closer{background:var(--ox);color:var(--white);text-align:center;padding:78px 0}
   .closer h2{max-width:none;margin:0 auto}
@@ -448,9 +456,20 @@
         <li><span class="k">Pickup</span><span class="v">In store pickup<small>Everything is picked up here at the plant, boxed and ready.</small></span></li>
         <li><span class="k">Pricing</span><span class="v">Call for a quote<small>Depends on the animal, the hanging weight, and your cut sheet.</small></span></li>
       </ul>
-      <div class="maph">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#8e8271" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Live Google map goes here<br>with one tap directions</span>
+      <div class="mapwrap">
+        <div class="mapbox">
+          <div class="mapfall">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#8e8271" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>7909 Hoboh Ln, Clermont, FL 34714</span>
+          </div>
+          <iframe title="Map to Osteen's Meat Service, 7909 Hoboh Ln, Clermont FL"
+            src="https://www.google.com/maps/embed?origin=mfe&amp;pb=!1m3!2m1!1s7909+Hoboh+Ln,+Clermont,+FL+34714!6i14"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <a class="dirbtn" href="https://www.google.com/maps/dir/?api=1&amp;destination=7909+Hoboh+Ln%2C+Clermont%2C+FL+34714" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Get directions
+        </a>
       </div>
     </div>
   </div>
