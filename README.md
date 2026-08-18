@@ -31,3 +31,5 @@ Live at `https://jsteffan7.github.io/demos/<slug>/`
 ## Current demos
 
 - `osteens/` Osteen's Meat Service, Clermont FL
+
+- `taylor-electric-air/` Taylor Electric and Air Conditioning, Clewiston FL
