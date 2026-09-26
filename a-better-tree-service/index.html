@@ -61,7 +61,8 @@ nav .navlink:hover::after{transform:scaleX(1)}
 .hero.full .wrap{width:100%}
 .bgwrap{position:absolute;inset:-12% 0 -12% 0;z-index:0;will-change:transform}
 .bg{position:absolute;inset:0;background-size:cover;background-position:center;animation:kb 22s ease-out both}
-.hero.full::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(var(--pri-rgb),.95) 0%,rgba(var(--pri-rgb),.82) 42%,rgba(var(--pri-rgb),.35) 78%,rgba(var(--pri-rgb),.2) 100%)}
+.hero.full::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(var(--pri-rgb),.97) 0%,rgba(var(--pri-rgb),.92) 38%,rgba(var(--pri-rgb),.62) 68%,rgba(var(--pri-rgb),.3) 100%)}
+@media(max-width:800px){.hero.full::before{background:rgba(var(--pri-rgb),.88)}}
 @keyframes kb{from{transform:scale(1.14)}to{transform:scale(1)}}
 .herogrid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 .herogrid.solo{grid-template-columns:1fr}
