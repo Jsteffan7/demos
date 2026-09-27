@@ -13,7 +13,7 @@ demos/
 └── <slug>/index.html     one self contained demo per prospect
 ```
 
-Live at `https://jsteffan7.github.io/demos/<slug>/`
+Live at `https://demos.eyeintheskysolutions.com/<slug>/` (custom domain via the CNAME file; the old jsteffan7.github.io/demos/ address redirects here)
 
 ## Adding a demo
 
