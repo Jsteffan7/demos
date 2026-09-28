@@ -1,4 +1,6 @@
 /* Make it mine: one tap way for a business owner to say "I want this site".
+   Tapping the button opens an email to Jeremy that is already written (business name and demo link included),
+   and shows a card with both prices plus text and call options in case email does not open.
    Loaded by every demo with <script src="/make-it-mine.js" data-business="Business Name" defer></script>
    Change prices or contact details here and every demo updates. */
 (function () {
@@ -6,7 +8,7 @@
   var BIZ = (S && S.getAttribute("data-business")) || document.title.split("|")[0].trim() || "your business";
   var PHONE = "+14122281969", PHONE_SHOW = "412-228-1969";
   var EMAIL = "jeremy.steffan@eyeintheskysolutions.com";
-  var PRICE_OWN = "$750", PRICE_MONTH = "$50";
+  var PRICE_OWN = "$750", PRICE_MONTH = "$49";
   var SLUG = location.pathname.replace(/^\/|\/$/g, "") || "home";
 
   function track(what) {
@@ -16,7 +18,10 @@
 
   var smsBody = "Hey Jeremy! I saw the " + BIZ + " website demo and I want it.";
   var smsHref = "sms:" + PHONE + "?&body=" + encodeURIComponent(smsBody);
-  var mailHref = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("The " + BIZ + " website") + "&body=" + encodeURIComponent("Hey Jeremy,\n\nI saw the demo you built for " + BIZ + " and I'm interested.\n\n");
+  var DEMO_URL = location.origin + location.pathname;
+  var mailHref = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Make it mine: " + BIZ + " website") + "&body=" + encodeURIComponent(
+    "Hi Jeremy,\n\nI'd like the website you built for " + BIZ + ".\nDemo: " + DEMO_URL +
+    "\n\nMy name: \nBest phone number: \nPlan: " + PRICE_OWN + " to own it outright, or " + PRICE_MONTH + " a month with hosting and updates included\n\nThanks!");
 
   var css = "" +
     ".eim-pill{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 18px 12px 14px;background:#0f172a;color:#fff;font:700 15px/1 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;letter-spacing:.01em;box-shadow:0 10px 30px rgba(2,6,23,.35),0 0 0 1px rgba(255,255,255,.12) inset;cursor:pointer;opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .35s ease,transform .35s ease,bottom .35s ease}" +
@@ -43,7 +48,7 @@
     ".eim-btn.main{background:var(--acc,#0f172a);border-color:transparent;color:#fff}" +
     ".eim-btn.main:hover{filter:brightness(1.08)}" +
     ".eim-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}" +
-    ".eim-fine{margin:14px 0 0;font-size:12.5px;color:#64748b;text-align:center}" +
+    ".eim-fine{margin:14px 0 0;font-size:12.5px;color:#64748b;text-align:center}.eim-nw{white-space:nowrap}" +
     ".eim-x{position:absolute;top:10px;right:10px;width:36px;height:36px;border:0;border-radius:50%;background:#f1f5f9;color:#0f172a;font-size:20px;line-height:1;cursor:pointer}" +
     ".eim-x:focus-visible,.eim-btn:focus-visible{outline:3px solid #60a5fa;outline-offset:2px}" +
     "@media (max-width:560px){.eim-back{align-items:flex-end;padding:0}.eim-card{max-width:none;border-radius:20px 20px 0 0;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}.eim-pill{right:14px}}" +
@@ -85,16 +90,16 @@
         '<button type="button" class="eim-x" aria-label="Close">&times;</button>' +
         '<p class="eim-k">Demo by Eye in the Sky Solutions</p>' +
         '<h2 class="eim-h" id="eim-h">Want this site for ' + esc(BIZ) + '?</h2>' +
-        '<p class="eim-p">I&rsquo;ll build the real one exactly how you want it. You don&rsquo;t pay a thing until you&rsquo;ve seen the finished site and signed off on it.</p>' +
+        '<p class="eim-p">Your email to Jeremy is drafted and ready to go; just hit send. Nothing is due until you&rsquo;ve seen the finished site and signed off on it.</p>' +
         '<div class="eim-prices">' +
           '<div class="eim-price"><b>' + PRICE_OWN + '</b><span>One time. You own it outright.</span></div>' +
           '<div class="eim-price"><b>' + PRICE_MONTH + '<small>/mo</small></b><span>I host it and handle any updates you need.</span></div>' +
         '</div>' +
         '<div class="eim-btns">' +
-          '<a class="eim-btn main" data-w="text" href="' + esc(smsHref) + '">Text Jeremy</a>' +
-          '<div class="eim-row"><a class="eim-btn" data-w="call" href="tel:' + PHONE + '">Call</a><a class="eim-btn" data-w="email" href="' + esc(mailHref) + '">Email</a></div>' +
+          '<a class="eim-btn main" data-w="email" href="' + esc(mailHref) + '">Email Jeremy</a>' +
+          '<div class="eim-row"><a class="eim-btn" data-w="text" href="' + esc(smsHref) + '">Text</a><a class="eim-btn" data-w="call" href="tel:' + PHONE + '">Call</a></div>' +
         '</div>' +
-        '<p class="eim-fine">Jeremy Steffan &middot; ' + PHONE_SHOW + ' &middot; Orlando, FL</p>' +
+        '<p class="eim-fine">Email didn&rsquo;t open? Write to <span class="eim-nw">' + EMAIL + '</span> or call <span class="eim-nw">' + PHONE_SHOW + '</span>.</p>' +
         '</div>';
       document.body.appendChild(back);
       requestAnimationFrame(function () { back.classList.add("on"); });
@@ -104,6 +109,9 @@
       });
       document.addEventListener("keydown", onKey);
       var x = back.querySelector(".eim-x"); if (x) x.focus();
+      // open their email app with the request already written, addressed to Jeremy
+      track("email-auto");
+      try { window.location.href = mailHref; } catch (e) {}
     }
     function close() {
       if (!back) return;
